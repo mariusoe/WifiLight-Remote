@@ -1,0 +1,74 @@
+<md-toolbar flex>
+  <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+    <p>{{ ctrl.title }}</p>
+    <div style="width: 40px; height: 40px;"></div>
+  </div>
+</md-toolbar>
+
+<div style="position: fixed; top: 40px; left: 0; right: 0; bottom: 0; overflow: scroll; padding: 12px;">
+  <div layout="column" layout-align="center center" flex>
+
+    <md-whiteframe class="md-whiteframe-3dp" layout="column" style="margin: 1em; width: 100%;" flex>
+      <div layout="column" flex style="margin-left: 1em;">
+        <h4>Connection:</h4>
+        <md-input-container class="md-block" style="margin-top: 0; margin-bottom: 0;">
+          <label>IP-Adress</label>
+          <input ng-model="ctrl.light.adress">
+        </md-input-container>
+      </div>
+    </md-whiteframe>
+
+    <md-whiteframe class="md-whiteframe-3dp" layout="column" style="margin: 1em; width: 100%;" flex>
+      <md-whiteframe class="md-whiteframe-3dp" layout="column" style="margin: 1em; height: 2em;" flex>
+        <div ng-style="{'background-color': 'rgb(' + ctrl.color.red + ',' + ctrl.color.green + ',' + ctrl.color.blue +')'}" flex></div>
+      </md-whiteframe>
+
+      <div layout="column" flex style="margin-left: 1em; margin-right: 1em;">
+        <md-slider-container>
+          <span>R</span>
+          <md-slider flex min="0" max="255" ng-model="ctrl.color.red" aria-label="red" id="red-slider" ng-change="ctrl.colorUpdate()"></md-slider>
+        </md-slider-container>
+        <md-slider-container>
+          <span>G</span>
+          <md-slider flex min="0" max="255" ng-model="ctrl.color.green" aria-label="green" id="green-slider" ng-change="ctrl.colorUpdate()"></md-slider>
+        </md-slider-container>
+        <md-slider-container>
+          <span>B</span>
+          <md-slider flex min="0" max="255" ng-model="ctrl.color.blue" aria-label="blue" id="blue-slider" ng-change="ctrl.colorUpdate()"></md-slider>
+        </md-slider-container>
+      </div>
+
+      <md-divider></md-divider>
+
+      <md-switch ng-model="ctrl.liveMode.enabled" aria-label="Live Mode" class="md-primary">
+        Live Mode:
+        {{ctrl.liveMode ? "On" : "Off"}}
+      </md-switch>
+
+      <md-divider></md-divider>
+
+      <div layout="row" layout-align="space-around center">
+        <md-button class="md-raised md-primary" ng-click="ctrl.setColor()" ng-disabled="ctrl.liveMode.enabled" flex>Set Color</md-button>
+      </div>
+    </md-whiteframe>
+
+    <md-whiteframe class="md-whiteframe-3dp" layout="column" style="margin: 1em; width: 100%;" flex>
+      <div layout="column" flex style="margin-left: 1em;">
+        <h4>Turn Off</h4>
+        <div layout="row" layout-align="center start">
+          <md-input-container class="md-block" style="margin-top: 4px; margin-bottom: 0;" flex>
+            <label>Duration [min]</label>
+            <input type="number" ng-model="ctrl.turnOffDuration">
+          </md-input-container>
+
+          <md-button class="md-raised md-primary" ng-click="ctrl.turnOff()" flex>Turn Off</md-button>
+        </div>
+      </div>
+
+      <md-divider></md-divider>
+
+      <md-button class="md-raised md-primary" ng-click="ctrl.turnOff(0)" flex>Turn Off Now</md-button>
+    </div>
+  </md-whiteframe>
+</div>
+</div>
